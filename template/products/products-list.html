@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+  {% for product in products %}
+    <ul>
+          <li>
+            <a href=" {{ product.get_absolute_url }}">
+              <h2>
+                 {{ product.title}} 
+              </h2>
+            </a>
+              <p>
+                  {{ product.brand }}
+                  <div>{{product.price}}</div>
+        
+                  <img src="{{ product.image.url }}" style="max-height:300px">
+              </p>
+          </li>
+    </ul>
+    {% endfor %}
+{% endblock %}
