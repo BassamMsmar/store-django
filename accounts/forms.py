@@ -1,14 +1,16 @@
-from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
+from .models import Profile
+from django import forms
+
 
 User = get_user_model()
 
-class SignUpForm(UserCreationForm):
 
-    first_name = forms.CharField( max_length=30, required=False)    
-    last_name = forms.CharField( max_length=30, required=False)
-    email = forms.EmailField(max_length=254 )
+class SignUpForm(UserCreationForm):
+    first_name = forms.CharField(max_length=30, required=False, help_text='Optional')
+    last_name = forms.CharField(max_length=30, required=False, help_text='Optional')
+    email = forms.EmailField(max_length=256, help_text='Required! Inform a valid email address')
 
     class Meta:
         model = User
@@ -18,5 +20,15 @@ class SignUpForm(UserCreationForm):
             'password2',
             'first_name',
             'last_name',
-            'email',
+            'email'
         )
+
+
+class UpdateProfileForm(forms.ModelForm):
+    address = forms.CharField(max_length=500)
+
+    class Meta:
+        model = Profile
+        fields = (
+            'address',
+            )

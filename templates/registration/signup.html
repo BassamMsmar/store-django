@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ operation.title }}{% endblock %}
+
+{% block content %}
+    <section class="form-section">
+        <h2 class="section-headline">{{ operation.title }}</h2>
+        <p class="section-description">
+            {{ operation.description }}
+        </p>
+        <div class="form">
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ user_form.as_p }}
+                {{ profile_form.as_p }}
+                <input class="submit-btn" type="submit" value="{{ operation.title }}">
+            </form>
+            <div>
+                <a href="{% url 'login' %}">Already have an account?</a>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'normalize.css' %}"/>
+    <link rel="stylesheet" href="{% static 'style.css' %}"/>
+    <title>{% block title %}{% endblock %} | Adetech Store</title>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <h1 id="logo">
+                <a href="{% url 'home' %}">STORE</a>
+            </h1>
+
+            <div id="controls">
+                <div id="cart">
+                    {% if user.is_superuser %}
+                    <a href="{% url 'product_add' %}">New</a>
+                    <a href="{% url 'order_list' %}">Orders</a>
+                        
+                    {% endif %}
+                </div>
+                <div>
+                    {% if user.is_authenticated %}
+                    <div id="cart">
+                        <a href="{% url 'cart' %}">
+                            <i class="fas fa-shopping-cart"></i>
+                        </a>
+                    </div>
+                        <p>Hi {{ user.username  | capfirst }}</p>
+                        <a id="logout" href="{% url 'logout' %}">Logout</a>
+                    {% else %}
+                        <a id="login" href="{% url 'login' %}">Login</a>
+                    {% endif %}
+                </div>
+            </div>
+        </header>
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
+    </div>
+    <footer>
+        <a href="#" id="scroll-up">
+            <i class="fas fa-chevron-up"></i>
+        </a>
+        <!--2-->
+        <p>&copy; 2020 STORE All Rights Reserved.</p>
+        <!--2-->
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
+</body>
+</html>
